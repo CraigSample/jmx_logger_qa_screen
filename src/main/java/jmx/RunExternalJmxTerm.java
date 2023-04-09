@@ -86,14 +86,14 @@ public class RunExternalJmxTerm {
 					String timestamp = readMetricArray[0];
 					
 					// The cassandra-stress is being run in mixed mode, so we'll tablulate for both standard1 and counter1.
-					Integer liveSSTableCountTotal = (int) (Miscellaneous.checkStringValue(readMetricArray[1], "LiveSSTableCount standard1", timestamp) +
-							Miscellaneous.checkStringValue(readMetricArray[2], "LiveSSTableCount counter1", timestamp));
+					Integer liveSSTableCountTotal = (int) (Miscellaneous.convertStringValue(readMetricArray[1], "LiveSSTableCount standard1", timestamp) +
+							Miscellaneous.convertStringValue(readMetricArray[2], "LiveSSTableCount counter1", timestamp));
 					
-					Long allMemtablesLiveDataSizeTotal = (long) (Miscellaneous.checkStringValue(readMetricArray[3], "AllMemtablesLiveDataSize standard1", timestamp) +
-							Miscellaneous.checkStringValue(readMetricArray[4], "AllMemtablesLiveDataSize counter1", timestamp));
+					Long allMemtablesLiveDataSizeTotal = (long) (Miscellaneous.convertStringValue(readMetricArray[3], "AllMemtablesLiveDataSize standard1", timestamp) +
+							Miscellaneous.convertStringValue(readMetricArray[4], "AllMemtablesLiveDataSize counter1", timestamp));
 					
-					Double readLatency95thPercentileTotal = Miscellaneous.checkStringValue(readMetricArray[5], "ReadLatency95thPercentileTotal", timestamp);
-					Double writeLatency95thPercentileTotal = Miscellaneous.checkStringValue(readMetricArray[6], "WriteLatency95thPercentileTotal", timestamp);
+					Double readLatency95thPercentileTotal = Miscellaneous.convertStringValue(readMetricArray[5], "ReadLatency95thPercentileTotal", timestamp);
+					Double writeLatency95thPercentileTotal = Miscellaneous.convertStringValue(readMetricArray[6], "WriteLatency95thPercentileTotal", timestamp);
 					
 					JmxListener.checkThresholds(liveSSTableCountTotal, allMemtablesLiveDataSizeTotal, readLatency95thPercentileTotal, writeLatency95thPercentileTotal);
 					

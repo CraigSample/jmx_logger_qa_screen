@@ -12,7 +12,7 @@ import com.datastax.driver.core.Session;
 import general.LoadPropertiesFile;
 
 public class CassandraConnectionTest {
-	
+
 	private static final Logger logger = LogManager.getLogger(Class.class.getName());
 
 	private static Cluster cluster;

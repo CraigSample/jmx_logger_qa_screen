@@ -9,12 +9,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class LoadPropertiesFile {
-	
-    private LoadPropertiesFile() { 
-    } 
-	
+
+    private LoadPropertiesFile() {
+    }
+
     private static final Logger logger = LogManager.getLogger(Class.class.getName());
 	/**
+	 * Get the given property from the config.properties file.
+	 *
 	 * @param key The name of the parameter key.
 	 */
 	public static String getProperty(String key) {
