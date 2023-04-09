@@ -4,13 +4,19 @@
 
 To design and create a program to record JMX values from a running Cassandra instance, while checking that certain thresholds are not exceeded. Recorded metrics are graphed and analysis is provided.
 
-#### Programming Languages :
+#### External Requirements
 
-* Java
+A running Cassandra instance.
+
+#### Programming Languages
+
+* Java (11+)
 
 ##### Configuration
 
-Please modify /src/main/java/general/WritePropertiesFile.java and populate with values that match your environment (such as IP, username, password, ports, etc.). When run, this will populate the config.properties file that the rest of the application may reference. Conversely, modify config.properties directly.
+Please modify /src/main/java/general/WritePropertiesFile.java and populate with values that match your environment (such as IP, username, password, ports, etc. for the Cassandra instance).
+
+When run, this will populate the config.properties file that the rest of the application may reference. Conversely, modify config.properties directly.
 
 ##### To Run
 
