@@ -26,6 +26,15 @@ public class RunExternalJmxTerm {
 
 	private static Process process;
 
+
+	/**
+	 * Run the external JMX term client against the given keyspace.
+	 * Retrieve metrics LiveSSTableCount, AllMemtablesLiveDataSize, ClientRequest read, ClientRequest write.
+	 *
+	 * @param keyspace The name of the keyspace to use.
+	 * @return SortedMap<String, String> The gathered metrics.
+	 * @throws IOException
+	 */
 	public static SortedMap<String, String> runExternalJmxTerm(String keyspace) throws IOException {
 		logger.info("================================================================================");
 		logger.info("  Starting RunExternalJmxTerm.runExternalJmxTerm...");

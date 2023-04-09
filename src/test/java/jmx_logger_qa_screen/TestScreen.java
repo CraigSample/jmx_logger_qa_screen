@@ -27,6 +27,20 @@ public class TestScreen {
 
 	private static final Logger logger = LogManager.getLogger(Class.class.getName());
 
+
+	/**
+	 * Run the logic to retrieve metrics from the Cassandra instance and generate output reports.
+	 *
+	 * @param args Main passed arguments.
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @throws IOException
+	 * @throws MalformedObjectNameException
+	 * @throws AttributeNotFoundException
+	 * @throws InstanceNotFoundException
+	 * @throws MBeanException
+	 * @throws ReflectionException
+	 */
 	public static void main(String[] args)
 			throws InterruptedException, ExecutionException, IOException, MalformedObjectNameException,
 			AttributeNotFoundException, InstanceNotFoundException, MBeanException, ReflectionException {
@@ -53,15 +67,14 @@ public class TestScreen {
 		// Connect to the JMX listener.
 		JmxListener.createConnectionToJmxService();
 
-		// While the cassandra-stress is running, poll with the jmx listener and gather
-		// metrics.
+		// While the cassandra-stress is running, poll with the jmx listener and gather metrics.
 		// Sleep at a set interval before retrieving metrics again.
 		while (!future.isDone()) {
 			// Retrieve the metrics from JMX. Use the default cassandra-space keyspace 'keyspace1'.
 			readMetricHash = (TreeMap<String, String>) JmxListener.getJmxMetrics(readMetricHash, "keyspace1");
 
 			// Every 30 seconds mention that we're waiting on cassandra-stress.
-			Miscellaneous.checkTime(startTime, "cassandra-stress");
+			Miscellaneous.reportWaitTime(startTime, "cassandra-stress");
 
 			Thread.sleep(querySleepInterval);
 		}
@@ -71,7 +84,7 @@ public class TestScreen {
 		RunExternalCassandraStress.close();
 
 		// Validate the JMX results.
-		validatedMetricHash = (TreeMap<String, String>) Miscellaneous.validateMetricHash(readMetricHash);
+		validatedMetricHash = (TreeMap<String, String>) Miscellaneous.convertMetricHash(readMetricHash);
 
 		// Create the chart
 		Chart.createChartHTML(validatedMetricHash);

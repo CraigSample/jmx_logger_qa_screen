@@ -19,6 +19,12 @@ public class CassandraConnectionTest {
 
 	private static Session session;
 
+
+	/**
+	 * Test the connection to the Cassandra instance.
+	 *
+	 * @param args Main passed arguments.
+	 */
 	public static void main(String[] args) {
 
 		logger.info("================================================================================");

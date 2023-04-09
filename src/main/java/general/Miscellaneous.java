@@ -13,7 +13,8 @@ public class Miscellaneous {
 
 
 	/**
-	 * Check if the passed metric string value is a positive number. Return the value as a double.
+	 * Check if the passed metric string value is a positive number.
+	 * Return the value as a double, returning 0 if the passed string is not a number or is a negative value.
 	 *
 	 * @param passedStringValue The string value to check.
 	 * @param passedMetricName The name of the metric being checked.
@@ -22,7 +23,7 @@ public class Miscellaneous {
 	 */
 	public static Double convertStringValue(String passedStringValue, String passedMetricName, String timestamp) {
 		logger.debug("================================================================================");
-		logger.debug("  Starting Miscellaneous.checkStringValue for '" + passedMetricName + "'...");
+		logger.debug("  Starting Miscellaneous.convertStringValue for '" + passedMetricName + "'...");
 
 		double tempValue = 0;
 
@@ -42,14 +43,14 @@ public class Miscellaneous {
 
 
 	/**
-	 * Check how long we have been waiting for the given metric name.
+	 * Report how long we have been waiting for the given name based upon the given timestamp.
 	 *
-	 * @param passedStartTime The timestamp of the given metric.
-	 * @param passedName The given metric.
+	 * @param passedStartTime The timestamp of the given name.
+	 * @param passedName The given name.
 	 */
-	public static void checkTime(Long passedStartTime, String passedName) {
+	public static void reportWaitTime(Long passedStartTime, String passedName) {
 		logger.debug("================================================================================");
-		logger.debug("  Starting Miscellaneous.checkTime for '" + passedName + "'...");
+		logger.debug("  Starting Miscellaneous.reportWaitTime for '" + passedName + "'...");
 
 		long currentTime = System.currentTimeMillis();
 
@@ -107,10 +108,10 @@ public class Miscellaneous {
 
 
 	/**
-	 * Check if the given string value is a number or not..
+	 * Check if the given string value is a number or not.
 	 *
 	 * @param str The given string value.
-	 * @return boolean Is the passed
+	 * @return boolean Is the passed string value a number?
 	 */
 	public static boolean isNumber(String str) {
 		logger.debug("================================================================================");
@@ -128,13 +129,14 @@ public class Miscellaneous {
 
 
 	/**
-	 * Check if the passed metric hash contains the expected keys: liveSSTableCount, allMemtablesLiveDataSize, readLatency95thPercentile, writeLatency95thPercentile.
-	 * Convert specific
-	 * @return SortedMap<String, String>
+	 * Convert the passed metric hash values from string to numbers.
+	 *
+	 * @param readMetricHash The metrics to be converted.
+	 * @return SortedMap<String, String> The converted metrics.
 	 */
-	public static SortedMap<String, String> validateMetricHash(SortedMap <String, String> readMetricHash) {
+	public static SortedMap<String, String> convertMetricHash(SortedMap <String, String> readMetricHash) {
 		logger.info("================================================================================");
-		logger.info("  Starting Miscellaneous.validateMetricHash...");
+		logger.info("  Starting Miscellaneous.convertMetricHash...");
 
 		TreeMap<String, String> validatedMetricHash = new TreeMap<>();
 

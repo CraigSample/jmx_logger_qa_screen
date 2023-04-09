@@ -11,6 +11,13 @@ public class RunExternalJmxTermTest {
 
 	private static final Logger logger = LogManager.getLogger(Class.class.getName());
 
+
+	/**
+	 * Test running the external JMX term process.
+	 *
+	 * @param args Main passed arguments.
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
 		logger.info("================================================================================");
 		logger.info("  Starting RunExternalJmxTermTest.main...");

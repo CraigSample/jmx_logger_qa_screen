@@ -52,9 +52,9 @@ public class WritePropertiesFile {
 			prop.setProperty("maximumBatchEntries", "100");
 
 			// Output cassandra-stress tables and keyspace
-//			prop.setProperty("cassandraStressKeyspace", "keyspace1");
-//			prop.setProperty("cassandraStressTableStandard", "standard1");
-//			prop.setProperty("cassandraStressTableCounter", "counter1");
+			// prop.setProperty("cassandraStressKeyspace", "keyspace1");
+			// prop.setProperty("cassandraStressTableStandard", "standard1");
+			// prop.setProperty("cassandraStressTableCounter", "counter1");
 
 			// Number of writes for cassandra-stress
 			prop.setProperty("numberOfWrites", "1000000");

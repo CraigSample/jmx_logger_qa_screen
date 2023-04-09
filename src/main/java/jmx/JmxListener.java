@@ -43,6 +43,13 @@ public class JmxListener {
 	private static final Double WRITELATENCY_THRESHOLD = Double.parseDouble(LoadPropertiesFile.getProperty("writeLatencyThreshold"));
 
 
+
+	/**
+	 * Create the connection to the JMX service.
+	 *
+	 * @return MBeanServerConnection The connection.
+	 * @throws IOException
+	 */
 	public static MBeanServerConnection createConnectionToJmxService() throws IOException {
 		logger.info("================================================================================");
 		logger.info("  Starting JmxListener.createConnectionToJmxService...");
@@ -55,10 +62,30 @@ public class JmxListener {
 		return jmxConnection;
 	}
 
+
+	/**
+	 * Close the connection.
+	 *
+	 * @throws IOException
+	 */
 	public static void close() throws IOException {
 		jmxConnector.close();
 	}
 
+
+	/**
+	 * Retrieve the JMX metrics from the listener. Values will be merged with the passed metric hash.
+	 *
+	 * @param readMetricHash A hash of metrics and values.
+	 * @param keyspace The keyspace to retrive metrics from.
+	 * @return SortedMap<String, String> The updated JMX metrics hash.
+	 * @throws MalformedObjectNameException
+	 * @throws AttributeNotFoundException
+	 * @throws InstanceNotFoundException
+	 * @throws MBeanException
+	 * @throws ReflectionException
+	 * @throws IOException
+	 */
 	public static SortedMap<String, String> getJmxMetrics(SortedMap<String, String> readMetricHash, String keyspace) throws MalformedObjectNameException, AttributeNotFoundException,
 			InstanceNotFoundException, MBeanException, ReflectionException, IOException {
 		logger.debug("================================================================================");
@@ -99,6 +126,15 @@ public class JmxListener {
 		return readMetricHash;
 	}
 
+
+	/**
+	 * Check that the passed metrics are within set thresholds and warn if they are not (will be graphed downstream).
+	 *
+	 * @param liveSSTableCountTotal The LiveSSTableCount totals.
+	 * @param allMemtablesLiveDataSizeTotal The AllMemtablesLiveDataSize totals.
+	 * @param readLatency95thPercentileTotal The ClientRequest read 95thPercentile totals.
+	 * @param writeLatency95thPercentileTotal The ClientRequest write 95thPercentile totals.
+	 */
 	public static void checkThresholds(Integer liveSSTableCountTotal, Long allMemtablesLiveDataSizeTotal, Double readLatency95thPercentileTotal, Double writeLatency95thPercentileTotal) {
 		logger.debug("================================================================================");
 		logger.debug("  Starting JmxListener.checkThresholds ...");

@@ -7,6 +7,12 @@ public class LogPrinterTest {
 
 	private static final Logger logger = LogManager.getLogger(Class.class.getName());
 
+
+    /**
+     * Simple test for the different logging output levels.
+     *
+     * @param args Main passed arguments.
+     */
     public static void main(String[] args) {
 
 		logger.info("================================================================================");
